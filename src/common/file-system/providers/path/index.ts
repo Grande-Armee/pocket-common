@@ -1,3 +1,3 @@
-export * from './path';
-export * from './constants';
-export * from './interfaces/path';
+export { Path } from './interfaces';
+
+export * from './path.provider';

@@ -1,3 +1,3 @@
-export * from './constants';
-export * from './pino';
-export * from './interfaces/pino';
+export { Pino } from './interfaces';
+
+export * from './pino.provider';

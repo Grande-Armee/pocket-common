@@ -1,3 +1,3 @@
-export * from './constants';
-export * from './dotenv';
-export * from './interfaces/dotenv';
+export { Dotenv } from './interfaces';
+
+export * from './dotenv.provider';
