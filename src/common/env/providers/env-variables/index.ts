@@ -1,3 +1,3 @@
-export * from './env-variables';
-export * from './constants';
-export * from './interfaces/env-variables';
+export { EnvVariables } from './interfaces';
+
+export * from './env-variables.provider';

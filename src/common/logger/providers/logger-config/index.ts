@@ -1,3 +1,3 @@
-export * from './logger-config';
-export * from './constants';
-export * from './interfaces/logger-config';
+export { LoggerConfig } from './interfaces';
+
+export * from './logger-config.provider';
