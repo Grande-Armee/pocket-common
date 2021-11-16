@@ -8,6 +8,9 @@ export * from './cls/services/clsContext/clsContextService';
 export * from './config/configModule';
 export * from './config/services/config/configService';
 
+export * from './dto/dtoModule';
+export * from './dto/providers/dtoFactory';
+
 export * from './env/envModule';
 export * from './env/services/env/envService';
 export * from './env/providers/envVariables';
@@ -21,3 +24,7 @@ export * from './logger/services/logger/loggerService';
 
 export * from './validator/validatorModule';
 export * from './validator/providers/joi';
+
+export * from './utils/mapper/mapper';
+export * from './utils/nullable/nullable';
+export * from './utils/testDataGenerator/testDataGenerator';
