@@ -1,11 +1,15 @@
-import pino from 'pino';
+import { pino } from 'pino';
 
 import { LoggerConfig } from '../loggerConfig';
 import { Pino } from './interfaces';
 
 export const pinoFactory = async (loggerConfig: LoggerConfig): Promise<Pino> => {
-  if (loggerConfig.prettifyLogs) {
-    return pino({
+  const { prettifyLogs, logLevel } = loggerConfig;
+
+  let instance = pino();
+
+  if (prettifyLogs) {
+    instance = pino({
       transport: {
         target: 'pino-pretty',
         options: {
@@ -15,5 +19,7 @@ export const pinoFactory = async (loggerConfig: LoggerConfig): Promise<Pino> => 
     });
   }
 
-  return pino();
+  instance.level = logLevel;
+
+  return instance;
 };

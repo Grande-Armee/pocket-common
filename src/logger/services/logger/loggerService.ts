@@ -2,8 +2,9 @@ import { Inject, Injectable, LoggerService as NestLoggerService } from '@nestjs/
 
 import { TRACE_ID_KEY } from '../../../cls/clsKeys';
 import { ClsContextService } from '../../../cls/services/clsContext/clsContextService';
+import { LogLevel } from '../../providers/loggerConfig/logLevel';
 import { Pino, PINO } from '../../providers/pino';
-import { LogContext } from './interfaces';
+import { LogContext, LogPayload } from './interfaces';
 
 @Injectable()
 export class LoggerService implements NestLoggerService {
@@ -12,27 +13,41 @@ export class LoggerService implements NestLoggerService {
     private readonly clsContextService: ClsContextService,
   ) {}
 
-  private logMessage(methodName: keyof Pino, message: string, context: LogContext = null): void {
-    const traceId = this.clsContextService.get(TRACE_ID_KEY);
+  private logMessage(logLevel: LogLevel, message: string, context: LogContext = null): void {
+    const traceId = this.clsContextService.get<string>(TRACE_ID_KEY);
 
-    this.pino[methodName].apply(this.pino, [
-      {
-        context: typeof context === 'object' ? context : null,
-        traceId,
-      },
-      message,
-    ]);
+    const logPayload: LogPayload = {
+      traceId,
+    };
+
+    if (typeof context === 'object' && context !== null) {
+      logPayload.context = context;
+    }
+
+    this.pino[logLevel].apply(this.pino, [logPayload, message]);
   }
 
-  public log(message: string, context?: LogContext): void {
-    this.logMessage('info', message, context);
+  public fatal(message: string, context?: LogContext): void {
+    this.logMessage(LogLevel.fatal, message, context);
   }
 
   public error(message: string, context?: LogContext): void {
-    this.logMessage('error', message, context);
+    this.logMessage(LogLevel.error, message, context);
   }
 
   public warn(message: string, context?: LogContext): void {
-    this.logMessage('warn', message, context);
+    this.logMessage(LogLevel.warn, message, context);
+  }
+
+  public info(message: string, context?: LogContext): void {
+    this.logMessage(LogLevel.info, message, context);
+  }
+
+  public debug(message: string, context?: LogContext): void {
+    this.logMessage(LogLevel.debug, message, context);
+  }
+
+  public log(message: string, context?: LogContext): void {
+    this.logMessage(LogLevel.info, message, context);
   }
 }
