@@ -1,3 +1,3 @@
-export abstract class Mapper<Entity, DTO> {
-  public abstract mapEntityToDTO(entity: Entity): DTO;
+export abstract class Mapper<Entity, Dto> {
+  public abstract mapEntityToDto(entity: Entity): Dto;
 }
