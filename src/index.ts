@@ -8,6 +8,9 @@ export * from './cls/services/clsContext/clsContextService';
 export * from './config/configModule';
 export * from './config/services/config/configService';
 
+export * from './domainEventsDispatcher/domainEventsDispatcherModule';
+export * from './domainEventsDispatcher/providers/domainEventsDispatcherFactory';
+
 export * from './dto/dtoModule';
 export * from './dto/providers/dtoFactory';
 
