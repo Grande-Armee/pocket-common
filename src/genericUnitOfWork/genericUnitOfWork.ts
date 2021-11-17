@@ -2,7 +2,7 @@ import { DomainEventsDispatcher } from '../domainEventsDispatcher/providers/doma
 import { LoggerService } from '../logger/services/logger/loggerService';
 import { TransactionalCallback } from './interfaces';
 
-export abstract class UnitOfWork {
+export abstract class GenericUnitOfWork {
   public constructor(
     protected readonly logger: LoggerService,
     protected readonly domainEventsDispatcher: DomainEventsDispatcher,
@@ -17,7 +17,7 @@ export abstract class UnitOfWork {
     return this.domainEventsDispatcher;
   }
 
-  public async runInTransaction<Result>(callback: TransactionalCallback<Result, UnitOfWork>): Promise<Result> {
+  public async runInTransaction<Result>(callback: TransactionalCallback<Result, GenericUnitOfWork>): Promise<Result> {
     try {
       await this.init();
 
