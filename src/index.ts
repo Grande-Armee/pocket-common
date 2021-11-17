@@ -22,6 +22,8 @@ export * from './fileSystem/fileSystemModule';
 export * from './fileSystem/services/fileSystem/fileSystemService';
 export * from './fileSystem/services/pathResolver/pathResolverService';
 
+export * from './unitOfWork/unitOfWork';
+
 export * from './logger/loggerModule';
 export * from './logger/services/logger/loggerService';
 
