@@ -1,16 +1,16 @@
-import { DomainEvent } from './domainEvent';
+import { IntegrationEvent } from './integrationEvent';
 
-export class DomainEventsDispatcher {
+export class IntegrationEventsDispatcher {
   // TODO: brokerService
   public constructor(private readonly brokerService: any) {}
 
-  private events: DomainEvent<unknown>[] = [];
+  private events: IntegrationEvent<unknown>[] = [];
 
-  public addEvent(event: DomainEvent<unknown>): void {
+  public addEvent(event: IntegrationEvent<unknown>): void {
     this.events.push(event);
   }
 
-  public getEvents(): DomainEvent<unknown>[] {
+  public getEvents(): IntegrationEvent<unknown>[] {
     return [...this.events];
   }
 

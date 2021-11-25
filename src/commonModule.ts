@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 
 import { ClsModule } from './cls/clsModule';
 import { ConfigModule } from './config/configModule';
-import { DomainEventsDispatcherModule } from './domainEventsDispatcher/domainEventsDispatcherModule';
 import { DtoModule } from './dto/dtoModule';
 import { EnvModule } from './env/envModule';
 import { FileSystemModule } from './fileSystem/fileSystemModule';
+import { IntegrationEventsDispatcherModule } from './integrationEventsDispatcher/integrationEventsDispatcherModule';
 import { LoggerModule } from './logger/loggerModule';
 import { ValidatorModule } from './validator/validatorModule';
 
@@ -18,7 +18,7 @@ import { ValidatorModule } from './validator/validatorModule';
     LoggerModule,
     ClsModule,
     DtoModule,
-    DomainEventsDispatcherModule,
+    IntegrationEventsDispatcherModule,
   ],
   exports: [
     FileSystemModule,
@@ -28,7 +28,7 @@ import { ValidatorModule } from './validator/validatorModule';
     LoggerModule,
     ClsModule,
     DtoModule,
-    DomainEventsDispatcherModule,
+    IntegrationEventsDispatcherModule,
   ],
 })
 export class CommonModule {}
