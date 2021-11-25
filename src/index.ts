@@ -8,8 +8,8 @@ export * from './cls/services/clsContext/clsContextService';
 export * from './config/configModule';
 export * from './config/services/config/configService';
 
-export * from './domainEventsDispatcher/domainEventsDispatcherModule';
-export * from './domainEventsDispatcher/providers/domainEventsDispatcherFactory';
+export * from './integrationEventsDispatcher/integrationEventsDispatcherModule';
+export * from './integrationEventsDispatcher/providers/integrationEventsDispatcherFactory';
 
 export * from './dto/dtoModule';
 export * from './dto/providers/dtoFactory';
@@ -22,8 +22,8 @@ export * from './fileSystem/fileSystemModule';
 export * from './fileSystem/services/fileSystem/fileSystemService';
 export * from './fileSystem/services/pathResolver/pathResolverService';
 
-export * from './genericUnitOfWork/interfaces';
-export * from './genericUnitOfWork/genericUnitOfWork';
+export * from './unitOfWork/interfaces';
+export * from './unitOfWork/unitOfWork';
 
 export * from './logger/loggerModule';
 export * from './logger/services/logger/loggerService';
