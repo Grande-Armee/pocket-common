@@ -5,17 +5,13 @@ import { TransactionalCallback } from './interfaces';
 export abstract class UnitOfWork {
   public constructor(
     protected readonly logger: LoggerService,
-    protected readonly integrationEventsDispatcher: IntegrationEventsDispatcher,
+    public readonly integrationEventsDispatcher: IntegrationEventsDispatcher,
   ) {}
 
   public abstract init(): Promise<void>;
   public abstract commit(): Promise<void>;
   public abstract rollback(): Promise<void>;
   public abstract cleanUp(): Promise<void>;
-
-  public getIntegrationEventsDispatcher(): IntegrationEventsDispatcher {
-    return this.integrationEventsDispatcher;
-  }
 
   public async runInTransaction<Result>(callback: TransactionalCallback<Result, UnitOfWork>): Promise<Result> {
     try {

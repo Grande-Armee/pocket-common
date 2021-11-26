@@ -1,6 +1,6 @@
 {
   "name": "@grande-armee/pocket-common",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Pocket common libraries",
   "author": "Grande Armee",
   "license": "MIT",
@@ -64,7 +64,7 @@
     "husky": "^7.0.4",
     "jest": "^27.3.1",
     "lint-staged": "^12.1.2",
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.0",
     "ts-jest": "^27.0.7",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
