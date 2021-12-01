@@ -1,36 +1,45 @@
-export * from './commonModule';
+export * from './common/commonModule';
 
-export * from './cls/clsModule';
-export * from './cls/clsKeys';
-export * from './cls/providers/clsNamespace';
-export * from './cls/services/clsContext/clsContextService';
+export * from './common/cls/clsModule';
+export * from './common/cls/clsKeys';
+export * from './common/cls/providers/clsNamespace';
+export * from './common/cls/services/clsContext/clsContextService';
 
-export * from './config/configModule';
-export * from './config/services/config/configService';
+export * from './common/config/configModule';
+export * from './common/config/services/config/configService';
 
-export * from './integrationEventsDispatcher/integrationEventsDispatcherModule';
-export * from './integrationEventsDispatcher/providers/integrationEventsDispatcherFactory';
+export * from './common/integrationEventsDispatcher/integrationEventsDispatcherModule';
+export * from './common/integrationEventsDispatcher/providers/integrationEventsDispatcherFactory';
 
-export * from './dto/dtoModule';
-export * from './dto/providers/dtoFactory';
+export * from './common/dto/dtoModule';
+export * from './common/dto/providers/dtoFactory';
+export * from './common/dto/errors';
 
-export * from './env/envModule';
-export * from './env/services/env/envService';
-export * from './env/providers/envVariables';
+export * from './common/env/envModule';
+export * from './common/env/services/env/envService';
+export * from './common/env/providers/envVariables';
 
-export * from './fileSystem/fileSystemModule';
-export * from './fileSystem/services/fileSystem/fileSystemService';
-export * from './fileSystem/services/pathResolver/pathResolverService';
+export * from './common/fileSystem/fileSystemModule';
+export * from './common/fileSystem/services/fileSystem/fileSystemService';
+export * from './common/fileSystem/services/pathResolver/pathResolverService';
 
-export * from './unitOfWork/interfaces';
-export * from './unitOfWork/unitOfWork';
+export * from './common/unitOfWork/types';
+export * from './common/unitOfWork/unitOfWork';
 
-export * from './logger/loggerModule';
-export * from './logger/services/logger/loggerService';
+export * from './common/logger/loggerModule';
+export * from './common/logger/services/logger/loggerService';
 
-export * from './validator/validatorModule';
-export * from './validator/providers/joi';
+export * from './common/validator/validatorModule';
+export * from './common/validator/providers/joi';
 
-export * from './utils/mapper/mapper';
-export * from './utils/nullable/nullable';
-export * from './utils/testDataGenerator/testDataGenerator';
+export * from './common/utils/mapper/mapper';
+export * from './common/utils/nullable/nullable';
+export * from './common/utils/testDataGenerator/testDataGenerator';
+
+export * from './common/json/jsonModule';
+export * from './common/json/providers/json';
+export * from './common/json/services/json/jsonService';
+
+export * from './common/uuid/uuidModule';
+export * from './common/uuid/providers/uuid';
+export * from './common/uuid/services/uuid/uuidService';

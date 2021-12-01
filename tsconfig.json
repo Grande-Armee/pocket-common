@@ -23,6 +23,7 @@
     "noUnusedLocals": true,
     "importHelpers": true,
     "esModuleInterop": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "strictPropertyInitialization": false
   }
 }
