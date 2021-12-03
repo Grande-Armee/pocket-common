@@ -43,3 +43,15 @@ export * from './common/json/services/json/jsonService';
 export * from './common/uuid/uuidModule';
 export * from './common/uuid/providers/uuid';
 export * from './common/uuid/services/uuid/uuidService';
+
+export * from './broker/brokerModule';
+export * from './broker/domain/user';
+export * from './broker/decorators/applyDecorators';
+export * from './broker/decorators/brokerController';
+export * from './broker/decorators/eventRoute';
+export * from './broker/decorators/rpcRoute';
+export * from './broker/dtos';
+export * from './broker/errors/brokerError';
+export * from './broker/interceptors/brokerInterceptor';
+export * from './broker/services/broker/brokerService';
+export * from './broker/types';
