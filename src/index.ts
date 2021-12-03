@@ -14,6 +14,7 @@ export * from './common/integrationEventsDispatcher/providers/integrationEventsD
 export * from './common/dto/dtoModule';
 export * from './common/dto/providers/dtoFactory';
 export * from './common/dto/errors';
+export * from './common/dto/decorators';
 
 export * from './common/env/envModule';
 export * from './common/env/services/env/envService';
@@ -32,9 +33,7 @@ export * from './common/logger/services/logger/loggerService';
 export * from './common/validator/validatorModule';
 export * from './common/validator/providers/joi';
 
-export * from './common/utils/mapper/mapper';
-export * from './common/utils/nullable/nullable';
-export * from './common/utils/testDataGenerator/testDataGenerator';
+export * from './utils';
 
 export * from './common/json/jsonModule';
 export * from './common/json/providers/json';
