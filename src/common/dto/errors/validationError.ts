@@ -5,7 +5,7 @@ export class ValidationError<Dto> extends Error {
   public readonly DtoConstructor: ClassConstructor<Dto>;
 
   public constructor(DtoConstructor: ClassConstructor<Dto>, validationErrors: any[]) {
-    super(`Error while validating dto (${DtoConstructor.name}): ${JSON.stringify(validationErrors)}.`);
+    super(`Error while validating dto (${DtoConstructor?.name}): ${JSON.stringify(validationErrors)}.`);
 
     this.validationErrors = validationErrors;
     this.DtoConstructor = DtoConstructor;

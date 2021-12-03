@@ -35,9 +35,7 @@ export class BrokerInterceptor implements NestInterceptor {
         return of(
           this.dtoFactory.create(BrokerResponseDto, {
             success: false,
-            payload: {
-              error: JSON.parse(JSON.stringify(error)),
-            },
+            payload: JSON.parse(JSON.stringify(error)),
           }),
         );
       }),

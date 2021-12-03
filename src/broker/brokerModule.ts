@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 
 import { CommonModule } from '../common/commonModule';
 import { UserTransporter } from './domain/user/userTransporter';
-import { BrokerInterceptor } from './interceptors/brokerInterceptor';
+import { BrokerInterceptor } from './interceptors';
 import { BrokerConfig, brokerConfigProvider, BROKER_CONFIG } from './providers/brokerConfig';
 import { BrokerService } from './services/broker/brokerService';
 
