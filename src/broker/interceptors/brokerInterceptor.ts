@@ -1,9 +1,9 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { TRACE_ID_KEY } from '../../common/cls/clsKeys';
-import { ClsContextService } from '../../common/cls/services/clsContext/clsContextService';
-import { DtoFactory } from '../../common/dto/providers/dtoFactory';
+import { TRACE_ID_KEY } from '../../cls/clsKeys';
+import { ClsContextService } from '../../cls/services/clsContext/clsContextService';
+import { DtoFactory } from '../../dto/providers/dtoFactory';
 import { BrokerResponseDto } from '../dtos';
 
 @Injectable()

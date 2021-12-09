@@ -1,6 +1,6 @@
 import { IsDate, IsString } from 'class-validator';
 
-import { AllowNull } from '../../../../common/dto/decorators';
+import { AllowNull } from '../../../../dto/decorators';
 
 export class ResourceDto {
   @IsString()

@@ -2,9 +2,9 @@ import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
 import { ClassConstructor } from 'class-transformer';
 
-import { TRACE_ID_KEY } from '../../../common/cls/clsKeys';
-import { ClsContextService } from '../../../common/cls/services/clsContext/clsContextService';
-import { DtoFactory } from '../../../common/dto/providers/dtoFactory';
+import { TRACE_ID_KEY } from '../../../cls/clsKeys';
+import { ClsContextService } from '../../../cls/services/clsContext/clsContextService';
+import { DtoFactory } from '../../../dto/providers/dtoFactory';
 import { BrokerMessageDataDto, BrokerMessageDto, BrokerResponseDto } from '../../dtos';
 import { BrokerMessage } from '../../types';
 
@@ -21,8 +21,6 @@ export class BrokerService {
     message: BrokerMessage,
   ): Promise<BrokerMessageDto> {
     const content = JSON.parse(message.content.toString());
-
-    console.log({ message, content, payloadDtoConstructor: PayloadDtoConstructor });
 
     const messageDto = this.dtoFactory.create<BrokerMessageDto>(BrokerMessageDto, content);
     const payload = this.dtoFactory.create<Payload>(PayloadDtoConstructor, messageDto.data.payload);
@@ -64,14 +62,14 @@ export class BrokerService {
   public async publish(routingKey: string, data: BrokerMessageDataDto): Promise<void> {
     const messageDto = this.createMessageDto(data);
 
-    return this.amqpConnection.publish('exchange1', routingKey, messageDto);
+    return this.amqpConnection.publish('pocketExchange', routingKey, messageDto);
   }
 
   public async request<Response>(routingKey: string, data: BrokerMessageDataDto): Promise<Response> {
     const messageDto = this.createMessageDto(data);
 
     const response = await this.amqpConnection.request<BrokerResponseDto>({
-      exchange: 'exchange1',
+      exchange: 'pocketExchange',
       routingKey,
       payload: messageDto,
       timeout: 25000,

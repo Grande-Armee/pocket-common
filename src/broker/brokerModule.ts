@@ -1,43 +1,64 @@
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 
-import { CommonModule } from '../common/commonModule';
-import { UserTransporter } from './domain/user/userTransporter';
+import { ClsModule } from '../cls/clsModule';
+import { DtoModule } from '../dto/dtoModule';
+import {
+  CollectionResourceTransporter,
+  CollectionTransporter,
+  ResourceTransporter,
+  TagTransporter,
+  UserResourceTagTransporter,
+  UserResourceTransporter,
+  UserTransporter,
+} from './domain';
 import { BrokerInterceptor } from './interceptors';
-import { BrokerConfig, brokerConfigProvider, BROKER_CONFIG } from './providers/brokerConfig';
 import { BrokerService } from './services/broker/brokerService';
+import { BrokerConfig } from './types';
 
-@Module({
-  imports: [CommonModule],
-  providers: [brokerConfigProvider],
-  exports: [brokerConfigProvider],
-})
-class BrokerConfigModule {}
+@Module({})
+export class BrokerModule {
+  public static forRoot(config: BrokerConfig): DynamicModule {
+    const { uri } = config;
 
-@Module({
-  imports: [
-    CommonModule,
-    BrokerConfigModule,
-    RabbitMQModule.forRootAsync(RabbitMQModule, {
-      imports: [BrokerConfigModule, CommonModule],
-      useFactory: (brokerConfig: BrokerConfig) => {
-        const { uri } = brokerConfig;
-
-        return {
+    return {
+      module: BrokerModule,
+      imports: [
+        DtoModule,
+        ClsModule,
+        RabbitMQModule.forRoot(RabbitMQModule, {
           exchanges: [
             {
-              name: 'exchange1',
+              name: 'pocketExchange',
               type: 'topic',
             },
           ],
           uri,
           connectionInitOptions: { wait: false },
-        };
-      },
-      inject: [BROKER_CONFIG],
-    }),
-  ],
-  providers: [BrokerInterceptor, BrokerService, UserTransporter],
-  exports: [RabbitMQModule, BrokerInterceptor, BrokerService, UserTransporter],
-})
-export class BrokerModule {}
+        }),
+      ],
+      providers: [
+        BrokerInterceptor,
+        BrokerService,
+        CollectionResourceTransporter,
+        CollectionTransporter,
+        ResourceTransporter,
+        TagTransporter,
+        UserResourceTagTransporter,
+        UserResourceTransporter,
+        UserTransporter,
+      ],
+      exports: [
+        BrokerInterceptor,
+        BrokerService,
+        CollectionResourceTransporter,
+        CollectionTransporter,
+        ResourceTransporter,
+        TagTransporter,
+        UserResourceTagTransporter,
+        UserResourceTransporter,
+        UserTransporter,
+      ],
+    };
+  }
+}
