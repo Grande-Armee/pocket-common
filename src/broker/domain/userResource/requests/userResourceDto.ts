@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsBoolean, IsDate, IsEnum, IsNumber, IsUUID, ValidateNested } from 'class-validator';
 
-import { AllowNull } from '../../../../common/dto/decorators';
+import { AllowNull } from '../../../../dto/decorators';
 import { ResourceDto } from '../../resource';
 import { TagDto } from '../../tag';
 import { UserResourceStatus } from '../types';

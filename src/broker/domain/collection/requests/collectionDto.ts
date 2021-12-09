@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsDate, IsString, IsUUID, ValidateNested } from 'class-validator';
 
-import { AllowNull } from '../../../../common/dto/decorators';
+import { AllowNull } from '../../../../dto/decorators';
 import { ResourceDto } from '../../resource/requests/resourceDto';
 
 export class CollectionDto {
