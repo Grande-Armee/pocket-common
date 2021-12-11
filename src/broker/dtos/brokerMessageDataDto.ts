@@ -1,11 +1,11 @@
-import { IsString, IsObject } from 'class-validator';
+import { IsString, IsObject, IsNumber } from 'class-validator';
 
 export class BrokerMessageDataDto {
   @IsString()
   public readonly id: string;
 
-  @IsString()
-  public readonly timestamp: string;
+  @IsNumber()
+  public readonly timestamp: number;
 
   @IsObject()
   public readonly payload: any;

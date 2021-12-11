@@ -1,6 +1,6 @@
 {
   "name": "@grande-armee/pocket-common",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Pocket common libraries",
   "author": "Grande Armee",
   "license": "MIT",
@@ -64,13 +64,13 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unicorn": "^39.0.0",
     "husky": "^7.0.4",
-    "jest": "^27.4.3",
+    "jest": "^27.4.4",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.1",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.3"
   }
 }

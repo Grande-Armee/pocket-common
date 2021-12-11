@@ -3,6 +3,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 
 import { ClsModule } from '../cls/clsModule';
 import { DtoModule } from '../dto/dtoModule';
+import { UuidModule } from '../uuid/uuidModule';
 import {
   CollectionResourceTransporter,
   CollectionTransporter,
@@ -26,6 +27,7 @@ export class BrokerModule {
       imports: [
         DtoModule,
         ClsModule,
+        UuidModule,
         RabbitMQModule.forRoot(RabbitMQModule, {
           exchanges: [
             {

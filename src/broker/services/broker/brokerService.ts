@@ -5,6 +5,8 @@ import { ClassConstructor } from 'class-transformer';
 import { TRACE_ID_KEY } from '../../../cls/clsKeys';
 import { ClsContextService } from '../../../cls/services/clsContext/clsContextService';
 import { DtoFactory } from '../../../dto/providers/dtoFactory';
+import { IntegrationEvent } from '../../../integrationEventsStore/providers/integrationEventsStoreFactory';
+import { UuidService } from '../../../uuid/services/uuid/uuidService';
 import { BrokerMessageDataDto, BrokerMessageDto, BrokerResponseDto } from '../../dtos';
 import { BrokerMessage } from '../../types';
 
@@ -14,6 +16,7 @@ export class BrokerService {
     private readonly amqpConnection: AmqpConnection,
     private readonly dtoFactory: DtoFactory,
     private readonly clsContextService: ClsContextService,
+    private readonly uuidService: UuidService,
   ) {}
 
   public async parseMessage<Payload>(
@@ -41,7 +44,7 @@ export class BrokerService {
       data,
       context: {
         traceId,
-        timestamp: String(Date.now()),
+        timestamp: Date.now(),
       },
     });
   }
@@ -53,8 +56,8 @@ export class BrokerService {
     const payloadDto = this.dtoFactory.create(PayloadDtoConstructor, payload);
 
     return this.dtoFactory.create(BrokerMessageDataDto, {
-      id: 'id',
-      timestamp: String(Date.now()),
+      id: this.uuidService.generateUuidV4(),
+      timestamp: Date.now(),
       payload: payloadDto,
     });
   }
@@ -63,6 +66,20 @@ export class BrokerService {
     const messageDto = this.createMessageDto(data);
 
     return this.amqpConnection.publish('pocketExchange', routingKey, messageDto);
+  }
+
+  public async publishEvent(event: IntegrationEvent<any>): Promise<void> {
+    const messageData = this.dtoFactory.create(BrokerMessageDataDto, event);
+
+    await this.publish(event.routingKey, messageData);
+  }
+
+  public async publishEvents(events: IntegrationEvent<any>[]): Promise<void> {
+    await events.reduce(async (result, event) => {
+      await result;
+
+      return this.publishEvent(event);
+    }, Promise.resolve());
   }
 
   public async request<Response>(routingKey: string, data: BrokerMessageDataDto): Promise<Response> {
