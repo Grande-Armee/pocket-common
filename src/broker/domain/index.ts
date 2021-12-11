@@ -5,3 +5,4 @@ export * from './tag';
 export * from './user';
 export * from './userResource';
 export * from './userResourceTag';
+export * from './shared';
