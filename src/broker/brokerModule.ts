@@ -4,6 +4,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { ClsModule } from '../cls/clsModule';
 import { DtoModule } from '../dto/dtoModule';
 import { UuidModule } from '../uuid/uuidModule';
+import { BrokerExchange } from './brokerExchange';
 import {
   CollectionResourceTransporter,
   CollectionTransporter,
@@ -31,7 +32,11 @@ export class BrokerModule {
         RabbitMQModule.forRoot(RabbitMQModule, {
           exchanges: [
             {
-              name: 'pocketExchange',
+              name: BrokerExchange.rpc,
+              type: 'topic',
+            },
+            {
+              name: BrokerExchange.events,
               type: 'topic',
             },
           ],
