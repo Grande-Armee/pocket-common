@@ -7,6 +7,7 @@ import { ClsContextService } from '../../../cls/services/clsContext/clsContextSe
 import { DtoFactory } from '../../../dto/providers/dtoFactory';
 import { IntegrationEvent } from '../../../integrationEventsStore/providers/integrationEventsStoreFactory';
 import { UuidService } from '../../../uuid/services/uuid/uuidService';
+import { BrokerExchange } from '../../brokerExchange';
 import { BrokerMessageDataDto, BrokerMessageDto, BrokerResponseDto } from '../../dtos';
 import { BrokerMessage } from '../../types';
 
@@ -65,13 +66,13 @@ export class BrokerService {
   public async publish(routingKey: string, data: BrokerMessageDataDto): Promise<void> {
     const messageDto = this.createMessageDto(data);
 
-    return this.amqpConnection.publish('pocketExchange', routingKey, messageDto);
+    return this.amqpConnection.publish(BrokerExchange.events, routingKey, messageDto);
   }
 
   public async publishEvent(event: IntegrationEvent<any>): Promise<void> {
     const messageData = this.dtoFactory.create(BrokerMessageDataDto, event);
 
-    await this.publish(event.routingKey, messageData);
+    await this.publish(event.name, messageData);
   }
 
   public async publishEvents(events: IntegrationEvent<any>[]): Promise<void> {
@@ -86,7 +87,7 @@ export class BrokerService {
     const messageDto = this.createMessageDto(data);
 
     const response = await this.amqpConnection.request<BrokerResponseDto>({
-      exchange: 'pocketExchange',
+      exchange: BrokerExchange.rpc,
       routingKey,
       payload: messageDto,
       timeout: 25000,
