@@ -17,6 +17,8 @@ export * from './dto/providers/dtoFactory';
 export * from './dto/errors';
 export * from './dto/decorators';
 
+export * from './envParser';
+
 export * from './fileSystem/fileSystemModule';
 export * from './fileSystem/services/fileSystem/fileSystemService';
 export * from './fileSystem/services/pathResolver/pathResolverService';
