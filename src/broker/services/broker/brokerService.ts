@@ -4,8 +4,8 @@ import { ClassConstructor } from 'class-transformer';
 
 import { TRACE_ID_KEY } from '../../../cls/clsKeys';
 import { ClsContextService } from '../../../cls/services/clsContext/clsContextService';
+import { IntegrationEvent } from '../../../domain/shared';
 import { DtoFactory } from '../../../dto/providers/dtoFactory';
-import { IntegrationEvent } from '../../../integrationEventsStore/providers/integrationEventsStoreFactory';
 import { UuidService } from '../../../uuid/services/uuid/uuidService';
 import { BrokerExchange } from '../../brokerExchange';
 import { BrokerMessageDataDto, BrokerMessageDto, BrokerResponseDto } from '../../dtos';

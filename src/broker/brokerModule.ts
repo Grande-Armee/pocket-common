@@ -5,6 +5,8 @@ import { ClsModule } from '../cls/clsModule';
 import { DtoModule } from '../dto/dtoModule';
 import { UuidModule } from '../uuid/uuidModule';
 import { BrokerExchange } from './brokerExchange';
+import { BrokerInterceptor } from './interceptors';
+import { BrokerService } from './services/broker/brokerService';
 import {
   CollectionResourceTransporter,
   CollectionTransporter,
@@ -13,9 +15,7 @@ import {
   UserResourceTagTransporter,
   UserResourceTransporter,
   UserTransporter,
-} from './domain';
-import { BrokerInterceptor } from './interceptors';
-import { BrokerService } from './services/broker/brokerService';
+} from './transporters';
 import { BrokerConfig } from './types';
 
 @Module({})

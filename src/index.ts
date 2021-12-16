@@ -1,16 +1,16 @@
 export * from './broker/decorators';
 export * from './broker/dtos';
-export * from './broker/errors';
 export * from './broker/interceptors';
 export * from './broker/services/broker/brokerService';
 export * from './broker/types';
 export * from './broker/brokerModule';
-export * from './broker/domain';
 
 export * from './cls/clsModule';
 export * from './cls/clsKeys';
 export * from './cls/providers/clsNamespace';
 export * from './cls/services/clsContext/clsContextService';
+
+export * from './domain';
 
 export * from './dto/dtoModule';
 export * from './dto/providers/dtoFactory';
