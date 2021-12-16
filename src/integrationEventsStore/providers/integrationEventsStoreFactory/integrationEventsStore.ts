@@ -1,4 +1,4 @@
-import { IntegrationEvent } from './integrationEvent';
+import { IntegrationEvent } from '../../../domain/shared';
 
 export class IntegrationEventsStore {
   private events: IntegrationEvent<unknown>[] = [];
