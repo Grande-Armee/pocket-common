@@ -2,6 +2,7 @@ export * from './broker/decorators';
 export * from './broker/dtos';
 export * from './broker/interceptors';
 export * from './broker/services/broker/brokerService';
+export * from './broker/transporters';
 export * from './broker/types';
 export * from './broker/brokerModule';
 
