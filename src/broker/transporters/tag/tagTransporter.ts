@@ -17,26 +17,18 @@ export class TagTransporter {
   public constructor(private readonly brokerService: BrokerService) {}
 
   public async createTag(payload: CreateTagPayloadDto): Promise<CreateTagResponseDto> {
-    const data = this.brokerService.createRpcData(CreateTagPayloadDto, payload);
-
-    return this.brokerService.request(TagRoutingKey.createTag, data);
+    return this.brokerService.request(TagRoutingKey.createTag, payload);
   }
 
   public async findTag(payload: FindTagPayloadDto): Promise<FindTagResponseDto> {
-    const data = this.brokerService.createRpcData(FindTagPayloadDto, payload);
-
-    return this.brokerService.request(TagRoutingKey.findTag, data);
+    return this.brokerService.request(TagRoutingKey.findTag, payload);
   }
 
   public async updateTag(payload: UpdateTagPayloadDto): Promise<UpdateTagResponseDto> {
-    const data = this.brokerService.createRpcData(UpdateTagPayloadDto, payload);
-
-    return this.brokerService.request(TagRoutingKey.updateTag, data);
+    return this.brokerService.request(TagRoutingKey.updateTag, payload);
   }
 
   public async removeTag(payload: RemoveTagPayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveTagPayloadDto, payload);
-
-    return this.brokerService.request(TagRoutingKey.removeTag, data);
+    return this.brokerService.request(TagRoutingKey.removeTag, payload);
   }
 }

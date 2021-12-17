@@ -2,7 +2,6 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { DynamicModule, Module } from '@nestjs/common';
 
 import { ClsModule } from '../cls/clsModule';
-import { DtoModule } from '../dto/dtoModule';
 import { UuidModule } from '../uuid/uuidModule';
 import { BrokerExchange } from './brokerExchange';
 import { BrokerInterceptor } from './interceptors';
@@ -26,7 +25,6 @@ export class BrokerModule {
     return {
       module: BrokerModule,
       imports: [
-        DtoModule,
         ClsModule,
         UuidModule,
         RabbitMQModule.forRoot(RabbitMQModule, {

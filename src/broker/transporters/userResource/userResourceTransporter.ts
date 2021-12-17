@@ -17,26 +17,18 @@ export class UserResourceTransporter {
   public constructor(private readonly brokerService: BrokerService) {}
 
   public async createUserResource(payload: CreateUserResourcePayloadDto): Promise<CreateUserResourceResponseDto> {
-    const data = this.brokerService.createRpcData(CreateUserResourcePayloadDto, payload);
-
-    return this.brokerService.request(UserResourceRoutingKey.createUserResource, data);
+    return this.brokerService.request(UserResourceRoutingKey.createUserResource, payload);
   }
 
   public async findUserResource(payload: FindUserResourcePayloadDto): Promise<FindUserResourceResponseDto> {
-    const data = this.brokerService.createRpcData(FindUserResourcePayloadDto, payload);
-
-    return this.brokerService.request(UserResourceRoutingKey.findUserResource, data);
+    return this.brokerService.request(UserResourceRoutingKey.findUserResource, payload);
   }
 
   public async updateUserResource(payload: UpdateUserResourcePayloadDto): Promise<UpdateUserResourceResponseDto> {
-    const data = this.brokerService.createRpcData(UpdateUserResourcePayloadDto, payload);
-
-    return this.brokerService.request(UserResourceRoutingKey.updateUserResource, data);
+    return this.brokerService.request(UserResourceRoutingKey.updateUserResource, payload);
   }
 
   public async removeUserResource(payload: RemoveUserResourcePayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveUserResourcePayloadDto, payload);
-
-    return this.brokerService.request(UserResourceRoutingKey.removeUserResource, data);
+    return this.brokerService.request(UserResourceRoutingKey.removeUserResource, payload);
   }
 }

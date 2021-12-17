@@ -1,6 +1,7 @@
 import { IsUUID, IsDate, IsString, IsEnum } from 'class-validator';
 
 import { UserLanguage, UserRole } from '../../../../domain/user';
+import { Transformer } from '../../../../transformer';
 
 export class UserDto {
   @IsUUID('4')
@@ -13,14 +14,16 @@ export class UserDto {
   public readonly updatedAt: Date;
 
   @IsString()
-  public email: string;
+  public readonly email: string;
 
   @IsString()
-  public password: string;
+  public readonly password: string;
 
   @IsEnum(UserRole)
-  public role: UserRole;
+  public readonly role: UserRole;
 
   @IsEnum(UserLanguage)
-  public language: UserLanguage;
+  public readonly language: UserLanguage;
+
+  public static readonly create = Transformer.createInstanceFactory(UserDto);
 }

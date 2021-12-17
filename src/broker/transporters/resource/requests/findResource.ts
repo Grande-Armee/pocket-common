@@ -1,15 +1,20 @@
 import { Type } from 'class-transformer';
 import { IsUUID, ValidateNested } from 'class-validator';
 
-import { ResourceDto } from './resourceDto';
+import { Transformer } from '../../../../transformer';
+import { ResourceDto } from './resource';
 
 export class FindResourcePayloadDto {
   @IsUUID('4')
-  public resourceId: string;
+  public readonly resourceId: string;
+
+  public static readonly create = Transformer.createInstanceFactory(FindResourcePayloadDto);
 }
 
 export class FindResourceResponseDto {
   @Type(() => ResourceDto)
   @ValidateNested()
-  public resource: ResourceDto;
+  public readonly resource: ResourceDto;
+
+  public static readonly create = Transformer.createInstanceFactory(FindResourceResponseDto);
 }

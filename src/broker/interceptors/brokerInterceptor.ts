@@ -3,12 +3,11 @@ import { catchError, map, of, switchMap } from 'rxjs';
 
 import { TRACE_ID_KEY } from '../../cls/clsKeys';
 import { ClsContextService } from '../../cls/services/clsContext/clsContextService';
-import { DtoFactory } from '../../dto/providers/dtoFactory';
 import { BrokerResponseDto } from '../dtos';
 
 @Injectable()
 export class BrokerInterceptor implements NestInterceptor {
-  public constructor(private readonly clsContextService: ClsContextService, private readonly dtoFactory: DtoFactory) {}
+  public constructor(private readonly clsContextService: ClsContextService) {}
 
   public intercept(executionContext: ExecutionContext, next: CallHandler<any>): any {
     return of(null).pipe(
@@ -24,7 +23,7 @@ export class BrokerInterceptor implements NestInterceptor {
         });
       }),
       map((payload) =>
-        this.dtoFactory.create(BrokerResponseDto, {
+        BrokerResponseDto.create({
           success: true,
           payload,
         }),
@@ -33,7 +32,7 @@ export class BrokerInterceptor implements NestInterceptor {
         console.log({ error });
 
         return of(
-          this.dtoFactory.create(BrokerResponseDto, {
+          BrokerResponseDto.create({
             success: false,
             payload: JSON.parse(JSON.stringify(error)),
           }),

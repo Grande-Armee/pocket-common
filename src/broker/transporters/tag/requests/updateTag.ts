@@ -1,23 +1,28 @@
 import { Type } from 'class-transformer';
 import { IsString, IsOptional, ValidateNested, IsUUID } from 'class-validator';
 
-import { TagDto } from './tagDto';
+import { Transformer } from '../../../../transformer';
+import { TagDto } from './tag';
 
 export class UpdateTagPayloadDto {
   @IsUUID('4')
-  public tagId: string;
+  public readonly tagId: string;
 
   @IsString()
   @IsOptional()
-  public color?: string;
+  public readonly color?: string;
 
   @IsString()
   @IsOptional()
-  public title?: string;
+  public readonly title?: string;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateTagPayloadDto);
 }
 
 export class UpdateTagResponseDto {
   @Type(() => TagDto)
   @ValidateNested()
-  public tag: TagDto;
+  public readonly tag: TagDto;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateTagResponseDto);
 }

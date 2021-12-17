@@ -1,15 +1,20 @@
 import { Type } from 'class-transformer';
 import { IsUUID, ValidateNested } from 'class-validator';
 
-import { TagDto } from './tagDto';
+import { Transformer } from '../../../../transformer';
+import { TagDto } from './tag';
 
 export class FindTagPayloadDto {
   @IsUUID('4')
-  public tagId: string;
+  public readonly tagId: string;
+
+  public static readonly create = Transformer.createInstanceFactory(FindTagPayloadDto);
 }
 
 export class FindTagResponseDto {
   @Type(() => TagDto)
   @ValidateNested()
-  public tag: TagDto;
+  public readonly tag: TagDto;
+
+  public static readonly create = Transformer.createInstanceFactory(FindTagResponseDto);
 }

@@ -17,26 +17,18 @@ export class CollectionTransporter {
   public constructor(private readonly brokerService: BrokerService) {}
 
   public async createCollection(payload: CreateCollectionPayloadDto): Promise<CreateCollectionResponseDto> {
-    const data = this.brokerService.createRpcData(CreateCollectionPayloadDto, payload);
-
-    return this.brokerService.request(CollectionRoutingKey.createCollection, data);
+    return this.brokerService.request(CollectionRoutingKey.createCollection, payload);
   }
 
   public async findCollection(payload: FindCollectionPayloadDto): Promise<FindCollectionResponseDto> {
-    const data = this.brokerService.createRpcData(FindCollectionPayloadDto, payload);
-
-    return this.brokerService.request(CollectionRoutingKey.findCollection, data);
+    return this.brokerService.request(CollectionRoutingKey.findCollection, payload);
   }
 
   public async updateCollection(payload: UpdateCollectionPayloadDto): Promise<UpdateCollectionResponseDto> {
-    const data = this.brokerService.createRpcData(UpdateCollectionPayloadDto, payload);
-
-    return this.brokerService.request(CollectionRoutingKey.updateCollection, data);
+    return this.brokerService.request(CollectionRoutingKey.updateCollection, payload);
   }
 
   public async removeCollection(payload: RemoveCollectionPayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveCollectionPayloadDto, payload);
-
-    return this.brokerService.request(CollectionRoutingKey.removeCollection, data);
+    return this.brokerService.request(CollectionRoutingKey.removeCollection, payload);
   }
 }

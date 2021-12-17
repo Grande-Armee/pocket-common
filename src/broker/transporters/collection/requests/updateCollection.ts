@@ -1,30 +1,35 @@
 import { Type } from 'class-transformer';
 import { IsString, IsOptional, ValidateNested, IsUUID } from 'class-validator';
 
-import { CollectionDto } from './collectionDto';
+import { Transformer } from '../../../../transformer';
+import { CollectionDto } from './collection';
 
 export class UpdateCollectionPayloadDto {
   @IsUUID('4')
-  public userId: string;
+  public readonly userId: string;
 
   @IsUUID('4')
-  public collectionId: string;
+  public readonly collectionId: string;
 
   @IsOptional()
   @IsString()
-  public title?: string;
+  public readonly title?: string;
 
   @IsOptional()
   @IsString()
-  public content?: string;
+  public readonly content?: string;
 
   @IsOptional()
   @IsString()
-  public thumbnailUrl?: string;
+  public readonly thumbnailUrl?: string;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateCollectionPayloadDto);
 }
 
 export class UpdateCollectionResponseDto {
   @Type(() => CollectionDto)
   @ValidateNested()
-  public collection: CollectionDto;
+  public readonly collection: CollectionDto;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateCollectionResponseDto);
 }

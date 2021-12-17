@@ -1,18 +1,18 @@
 import { Type } from 'class-transformer';
 import { IsDate, IsString, IsUUID, ValidateNested } from 'class-validator';
 
-import { AllowNull } from '../../../../dto/decorators';
-import { ResourceDto } from '../../resource/requests/resourceDto';
+import { AllowNull, Transformer } from '../../../../transformer';
+import { ResourceDto } from '../../resource/requests';
 
 export class CollectionDto {
   @IsUUID('4')
-  public id: string;
+  public readonly id: string;
 
   @IsDate()
-  public createdAt: Date;
+  public readonly createdAt: Date;
 
   @IsDate()
-  public updatedAt: Date;
+  public readonly updatedAt: Date;
 
   @IsString()
   @AllowNull()
@@ -33,4 +33,6 @@ export class CollectionDto {
   @Type(() => ResourceDto)
   @ValidateNested()
   public readonly resources: ResourceDto[] | null;
+
+  public static readonly create = Transformer.createInstanceFactory(CollectionDto);
 }

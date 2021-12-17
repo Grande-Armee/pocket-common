@@ -2,30 +2,35 @@ import { Type } from 'class-transformer';
 import { IsOptional, ValidateNested, IsBoolean, IsNumber, IsUUID, IsEnum } from 'class-validator';
 
 import { UserResourceStatus } from '../../../../domain/userResource';
-import { UserResourceDto } from './userResourceDto';
+import { Transformer } from '../../../../transformer';
+import { UserResourceDto } from './userResource';
 
 export class UpdateUserResourcePayloadDto {
   @IsUUID('4')
-  public userId: string;
+  public readonly userId: string;
 
   @IsUUID('4')
-  public resourceId: string;
+  public readonly resourceId: string;
 
   @IsOptional()
   @IsEnum(UserResourceStatus)
-  public status?: UserResourceStatus;
+  public readonly status?: UserResourceStatus;
 
   @IsOptional()
   @IsBoolean()
-  public isFavorite?: boolean;
+  public readonly isFavorite?: boolean;
 
   @IsOptional()
   @IsNumber()
-  public rating?: number;
+  public readonly rating?: number;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateUserResourcePayloadDto);
 }
 
 export class UpdateUserResourceResponseDto {
   @Type(() => UserResourceDto)
   @ValidateNested()
-  public userResource: UserResourceDto;
+  public readonly userResource: UserResourceDto;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateUserResourceResponseDto);
 }

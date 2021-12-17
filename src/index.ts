@@ -13,10 +13,7 @@ export * from './cls/services/clsContext/clsContextService';
 
 export * from './domain';
 
-export * from './dto/dtoModule';
-export * from './dto/providers/dtoFactory';
-export * from './dto/errors';
-export * from './dto/decorators';
+export * from './transformer';
 
 export * from './envParser';
 

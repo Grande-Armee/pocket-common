@@ -4,4 +4,4 @@ export * from './loginUser';
 export * from './removeUser';
 export * from './setNewPassword';
 export * from './updateUser';
-export * from './userDto';
+export * from './user';

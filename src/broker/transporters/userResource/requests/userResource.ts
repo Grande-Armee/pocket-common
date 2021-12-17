@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { IsBoolean, IsDate, IsEnum, IsNumber, IsUUID, ValidateNested } from 'class-validator';
 
 import { UserResourceStatus } from '../../../../domain/userResource';
-import { AllowNull } from '../../../../dto/decorators';
+import { Transformer, AllowNull } from '../../../../transformer';
 import { ResourceDto } from '../../resource';
 import { TagDto } from '../../tag';
 
@@ -41,4 +41,6 @@ export class UserResourceDto {
   @Type(() => TagDto)
   @ValidateNested()
   public readonly tags: TagDto[] | null;
+
+  public static readonly create = Transformer.createInstanceFactory(UserResourceDto);
 }

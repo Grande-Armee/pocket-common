@@ -1,18 +1,23 @@
 import { Type } from 'class-transformer';
 import { IsUUID, ValidateNested } from 'class-validator';
 
-import { CollectionDto } from './collectionDto';
+import { Transformer } from '../../../../transformer';
+import { CollectionDto } from './collection';
 
 export class FindCollectionPayloadDto {
   @IsUUID('4')
-  public userId: string;
+  public readonly userId: string;
 
   @IsUUID('4')
-  public collectionId: string;
+  public readonly collectionId: string;
+
+  public static readonly create = Transformer.createInstanceFactory(FindCollectionPayloadDto);
 }
 
 export class FindCollectionResponseDto {
   @Type(() => CollectionDto)
   @ValidateNested()
-  public collection: CollectionDto;
+  public readonly collection: CollectionDto;
+
+  public static readonly create = Transformer.createInstanceFactory(FindCollectionResponseDto);
 }

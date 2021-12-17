@@ -1,11 +1,9 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
-import { ClassConstructor } from 'class-transformer';
 
 import { TRACE_ID_KEY } from '../../../cls/clsKeys';
 import { ClsContextService } from '../../../cls/services/clsContext/clsContextService';
 import { IntegrationEvent } from '../../../domain/shared';
-import { DtoFactory } from '../../../dto/providers/dtoFactory';
 import { UuidService } from '../../../uuid/services/uuid/uuidService';
 import { BrokerExchange } from '../../brokerExchange';
 import { BrokerMessageDataDto, BrokerMessageDto, BrokerResponseDto } from '../../dtos';
@@ -15,51 +13,25 @@ import { BrokerMessage } from '../../types';
 export class BrokerService {
   public constructor(
     private readonly amqpConnection: AmqpConnection,
-    private readonly dtoFactory: DtoFactory,
     private readonly clsContextService: ClsContextService,
     private readonly uuidService: UuidService,
   ) {}
 
-  public async parseMessage<Payload>(
-    PayloadDtoConstructor: ClassConstructor<Payload>,
-    message: BrokerMessage,
-  ): Promise<BrokerMessageDto> {
+  public async parseMessage(message: BrokerMessage): Promise<BrokerMessageDto> {
     const content = JSON.parse(message.content.toString());
 
-    const messageDto = this.dtoFactory.create<BrokerMessageDto>(BrokerMessageDto, content);
-    const payload = this.dtoFactory.create<Payload>(PayloadDtoConstructor, messageDto.data.payload);
-
-    return this.dtoFactory.create(BrokerMessageDto, {
-      ...messageDto,
-      data: {
-        ...messageDto.data,
-        payload,
-      },
-    });
+    return BrokerMessageDto.create(content);
   }
 
   private createMessageDto(data: BrokerMessageDataDto): BrokerMessageDto {
     const traceId = this.clsContextService.get<string>(TRACE_ID_KEY) || '';
 
-    return this.dtoFactory.create(BrokerMessageDto, {
+    return BrokerMessageDto.create({
       data,
       context: {
         traceId,
         timestamp: Date.now(),
       },
-    });
-  }
-
-  public createRpcData<Payload>(
-    PayloadDtoConstructor: ClassConstructor<Payload>,
-    payload: Payload,
-  ): BrokerMessageDataDto {
-    const payloadDto = this.dtoFactory.create(PayloadDtoConstructor, payload);
-
-    return this.dtoFactory.create(BrokerMessageDataDto, {
-      id: this.uuidService.generateUuidV4(),
-      timestamp: Date.now(),
-      payload: payloadDto,
     });
   }
 
@@ -70,7 +42,7 @@ export class BrokerService {
   }
 
   public async publishEvent(event: IntegrationEvent<any>): Promise<void> {
-    const messageData = this.dtoFactory.create(BrokerMessageDataDto, event);
+    const messageData = BrokerMessageDataDto.create(event);
 
     await this.publish(event.name, messageData);
   }
@@ -83,7 +55,12 @@ export class BrokerService {
     }, Promise.resolve());
   }
 
-  public async request<Response>(routingKey: string, data: BrokerMessageDataDto): Promise<Response> {
+  public async request<Payload, Response>(routingKey: string, payload: Payload): Promise<Response> {
+    const data = BrokerMessageDataDto.create({
+      id: this.uuidService.generateUuidV4(),
+      timestamp: Date.now(),
+      payload,
+    });
     const messageDto = this.createMessageDto(data);
 
     const response = await this.amqpConnection.request<BrokerResponseDto>({

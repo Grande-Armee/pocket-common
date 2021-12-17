@@ -1,6 +1,6 @@
 import { IsDate, IsString } from 'class-validator';
 
-import { AllowNull } from '../../../../dto/decorators';
+import { AllowNull, Transformer } from '../../../../transformer';
 
 export class ResourceDto {
   @IsString()
@@ -26,4 +26,6 @@ export class ResourceDto {
   @IsString()
   @AllowNull()
   public readonly content: string | null;
+
+  public static readonly create = Transformer.createInstanceFactory(ResourceDto);
 }

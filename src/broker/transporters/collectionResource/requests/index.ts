@@ -1,3 +1,3 @@
-export * from './collectionResourceDto';
+export * from './collectionResource';
 export * from './createCollectionResource';
 export * from './removeCollectionResource';

@@ -21,38 +21,26 @@ export class UserTransporter {
   public constructor(private readonly brokerService: BrokerService) {}
 
   public async createUser(payload: CreateUserPayloadDto): Promise<CreateUserResponseDto> {
-    const data = this.brokerService.createRpcData(CreateUserPayloadDto, payload);
-
-    return this.brokerService.request(UserRoutingKey.createUser, data);
+    return this.brokerService.request(UserRoutingKey.createUser, payload);
   }
 
   public async findUser(payload: FindUserPayloadDto): Promise<FindUserResponseDto> {
-    const data = this.brokerService.createRpcData(FindUserPayloadDto, payload);
-
-    return this.brokerService.request(UserRoutingKey.findUser, data);
+    return this.brokerService.request(UserRoutingKey.findUser, payload);
   }
 
   public async updateUser(payload: UpdateUserPayloadDto): Promise<UpdateUserResponseDto> {
-    const data = this.brokerService.createRpcData(UpdateUserPayloadDto, payload);
-
-    return this.brokerService.request(UserRoutingKey.updateUser, data);
+    return this.brokerService.request(UserRoutingKey.updateUser, payload);
   }
 
   public async removeUser(payload: RemoveUserPayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveUserPayloadDto, payload);
-
-    return this.brokerService.request(UserRoutingKey.removeUser, data);
+    return this.brokerService.request(UserRoutingKey.removeUser, payload);
   }
 
   public async loginUser(payload: LoginUserPayloadDto): Promise<LoginUserResponseDto> {
-    const data = this.brokerService.createRpcData(LoginUserPayloadDto, payload);
-
-    return this.brokerService.request(UserRoutingKey.loginUser, data);
+    return this.brokerService.request(UserRoutingKey.loginUser, payload);
   }
 
   public async setNewPassword(payload: SetNewPasswordPayloadDto): Promise<SetNewPasswordResponseDto> {
-    const data = this.brokerService.createRpcData(SetNewPasswordPayloadDto, payload);
-
-    return this.brokerService.request(UserRoutingKey.setNewPassword, data);
+    return this.brokerService.request(UserRoutingKey.setNewPassword, payload);
   }
 }

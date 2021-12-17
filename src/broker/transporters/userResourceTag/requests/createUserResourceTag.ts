@@ -1,21 +1,26 @@
 import { Type } from 'class-transformer';
 import { IsUUID, ValidateNested } from 'class-validator';
 
-import { UserResourceTagDto } from './userResourceTagDto';
+import { Transformer } from '../../../../transformer';
+import { UserResourceTagDto } from './userResourceTag';
 
 export class CreateUserResourceTagPayloadDto {
   @IsUUID('4')
-  public userId: string;
+  public readonly userId: string;
 
   @IsUUID('4')
-  public resourceId: string;
+  public readonly resourceId: string;
 
   @IsUUID('4')
-  public tagId: string;
+  public readonly tagId: string;
+
+  public static readonly create = Transformer.createInstanceFactory(CreateUserResourceTagPayloadDto);
 }
 
 export class CreateUserResourceTagResponseDto {
   @Type(() => UserResourceTagDto)
   @ValidateNested()
-  public userResourceTag: UserResourceTagDto;
+  public readonly userResourceTag: UserResourceTagDto;
+
+  public static readonly create = Transformer.createInstanceFactory(CreateUserResourceTagResponseDto);
 }

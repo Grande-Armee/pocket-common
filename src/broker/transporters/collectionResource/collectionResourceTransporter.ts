@@ -15,14 +15,10 @@ export class CollectionResourceTransporter {
   public async createCollectionResource(
     payload: CreateCollectionResourcePayloadDto,
   ): Promise<CreateCollectionResourceResponseDto> {
-    const data = this.brokerService.createRpcData(CreateCollectionResourcePayloadDto, payload);
-
-    return this.brokerService.request(CollectionResourceRoutingKey.createCollectionResource, data);
+    return this.brokerService.request(CollectionResourceRoutingKey.createCollectionResource, payload);
   }
 
   public async removeCollectionResource(payload: RemoveCollectionResourcePayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveCollectionResourcePayloadDto, payload);
-
-    return this.brokerService.request(CollectionResourceRoutingKey.removeCollectionResource, data);
+    return this.brokerService.request(CollectionResourceRoutingKey.removeCollectionResource, payload);
   }
 }
