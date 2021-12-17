@@ -1,9 +1,13 @@
 import { IsBoolean, IsNotEmpty } from 'class-validator';
 
+import { Transformer } from '../../transformer';
+
 export class BrokerResponseDto {
   @IsBoolean()
-  public success: boolean;
+  public readonly success: boolean;
 
   @IsNotEmpty()
-  public payload: any;
+  public readonly payload: any;
+
+  public static readonly create = Transformer.createInstanceFactory(BrokerResponseDto);
 }

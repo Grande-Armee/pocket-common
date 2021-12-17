@@ -1,9 +1,13 @@
 import { IsUUID } from 'class-validator';
 
+import { Transformer } from '../../../../transformer';
+
 export class RemoveUserResourcePayloadDto {
   @IsUUID('4')
-  public userId: string;
+  public readonly userId: string;
 
   @IsUUID('4')
-  public resourceId: string;
+  public readonly resourceId: string;
+
+  public static readonly create = Transformer.createInstanceFactory(RemoveUserResourcePayloadDto);
 }

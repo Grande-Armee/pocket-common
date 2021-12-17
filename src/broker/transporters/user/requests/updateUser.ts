@@ -2,7 +2,8 @@ import { Type } from 'class-transformer';
 import { IsEnum, IsUUID, ValidateNested } from 'class-validator';
 
 import { UserLanguage } from '../../../../domain/user';
-import { UserDto } from './userDto';
+import { Transformer } from '../../../../transformer';
+import { UserDto } from './user';
 
 export class UpdateUserPayloadDto {
   @IsUUID('4')
@@ -10,10 +11,14 @@ export class UpdateUserPayloadDto {
 
   @IsEnum(UserLanguage)
   public readonly language: UserLanguage;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateUserPayloadDto);
 }
 
 export class UpdateUserResponseDto {
   @Type(() => UserDto)
   @ValidateNested()
   public readonly user: UserDto;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateUserResponseDto);
 }

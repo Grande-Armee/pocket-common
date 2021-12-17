@@ -15,14 +15,10 @@ export class UserResourceTagTransporter {
   public async createUserResourceTag(
     payload: CreateUserResourceTagPayloadDto,
   ): Promise<CreateUserResourceTagResponseDto> {
-    const data = this.brokerService.createRpcData(CreateUserResourceTagPayloadDto, payload);
-
-    return this.brokerService.request(UserResourceTagRoutingKey.createUserResourceTag, data);
+    return this.brokerService.request(UserResourceTagRoutingKey.createUserResourceTag, payload);
   }
 
   public async removeUserResourceTag(payload: RemoveUserResourceTagPayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveUserResourceTagPayloadDto, payload);
-
-    return this.brokerService.request(UserResourceTagRoutingKey.removeUserResourceTag, data);
+    return this.brokerService.request(UserResourceTagRoutingKey.removeUserResourceTag, payload);
   }
 }

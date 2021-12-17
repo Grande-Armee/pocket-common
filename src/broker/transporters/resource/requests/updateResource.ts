@@ -1,27 +1,32 @@
 import { Type } from 'class-transformer';
 import { IsString, IsOptional, ValidateNested, IsUUID } from 'class-validator';
 
-import { ResourceDto } from './resourceDto';
+import { Transformer } from '../../../../transformer';
+import { ResourceDto } from './resource';
 
 export class UpdateResourcePayloadDto {
   @IsUUID('4')
-  public resourceId: string;
+  public readonly resourceId: string;
 
   @IsOptional()
   @IsString()
-  public title?: string;
+  public readonly title?: string;
 
   @IsOptional()
   @IsString()
-  public content?: string;
+  public readonly content?: string;
 
   @IsOptional()
   @IsString()
-  public thumbnailUrl?: string;
+  public readonly thumbnailUrl?: string;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateResourcePayloadDto);
 }
 
 export class UpdateResourceResponseDto {
   @Type(() => ResourceDto)
   @ValidateNested()
-  public resource: ResourceDto;
+  public readonly resource: ResourceDto;
+
+  public static readonly create = Transformer.createInstanceFactory(UpdateResourceResponseDto);
 }

@@ -17,26 +17,18 @@ export class ResourceTransporter {
   public constructor(private readonly brokerService: BrokerService) {}
 
   public async createResource(payload: CreateResourcePayloadDto): Promise<CreateResourceResponseDto> {
-    const data = this.brokerService.createRpcData(CreateResourcePayloadDto, payload);
-
-    return this.brokerService.request(ResourceRoutingKey.createResource, data);
+    return this.brokerService.request(ResourceRoutingKey.createResource, payload);
   }
 
   public async findResource(payload: FindResourcePayloadDto): Promise<FindResourceResponseDto> {
-    const data = this.brokerService.createRpcData(FindResourcePayloadDto, payload);
-
-    return this.brokerService.request(ResourceRoutingKey.findResource, data);
+    return this.brokerService.request(ResourceRoutingKey.findResource, payload);
   }
 
   public async updateResource(payload: UpdateResourcePayloadDto): Promise<UpdateResourceResponseDto> {
-    const data = this.brokerService.createRpcData(UpdateResourcePayloadDto, payload);
-
-    return this.brokerService.request(ResourceRoutingKey.updateResource, data);
+    return this.brokerService.request(ResourceRoutingKey.updateResource, payload);
   }
 
   public async removeResource(payload: RemoveResourcePayloadDto): Promise<void> {
-    const data = this.brokerService.createRpcData(RemoveResourcePayloadDto, payload);
-
-    return this.brokerService.request(ResourceRoutingKey.removeResource, data);
+    return this.brokerService.request(ResourceRoutingKey.removeResource, payload);
   }
 }
