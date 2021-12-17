@@ -19,5 +19,5 @@ export class FindUserResourceResponseDto {
   @ValidateNested()
   public readonly userResource: UserResourceDto;
 
-  public static readonly create = Transformer.createInstanceFactory(FindUserResourcePayloadDto);
+  public static readonly create = Transformer.createInstanceFactory(FindUserResourceResponseDto);
 }
