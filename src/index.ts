@@ -40,5 +40,4 @@ export * from './uuid/uuidModule';
 export * from './uuid/providers/uuid';
 export * from './uuid/services/uuid/uuidService';
 
-export * from './validator/validatorModule';
-export * from './validator/providers/joi';
+export * from './validator';
