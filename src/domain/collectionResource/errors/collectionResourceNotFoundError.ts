@@ -10,9 +10,7 @@ type ErrorContext =
     };
 
 export class CollectionResourceNotFoundError extends DomainError<ErrorContext> {
-  public readonly name: 'CollectionResourceNotFound';
-
   public constructor(context: ErrorContext) {
-    super(`CollectionResource not found.`, context);
+    super(CollectionResourceNotFoundError.name, `CollectionResource not found.`, context);
   }
 }
