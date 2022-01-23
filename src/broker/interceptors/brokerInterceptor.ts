@@ -29,12 +29,24 @@ export class BrokerInterceptor implements NestInterceptor {
         }),
       ),
       catchError((error) => {
-        console.log({ error });
+        if (!(error instanceof Error)) {
+          return of(
+            BrokerResponseDto.create({
+              success: false,
+              payload: JSON.parse(JSON.stringify(error)),
+            }),
+          );
+        }
 
         return of(
           BrokerResponseDto.create({
             success: false,
-            payload: JSON.parse(JSON.stringify(error)),
+            payload: {
+              name: error.name,
+              stack: error.stack,
+              message: error.message,
+              details: JSON.parse(JSON.stringify(error)), // only custom error props will be serialized
+            },
           }),
         );
       }),
