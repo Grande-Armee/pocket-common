@@ -11,6 +11,8 @@ type ErrorContext =
     };
 
 export class UserResourceTagNotFoundError extends DomainError<ErrorContext> {
+  public readonly name: 'UserResourceTagNotFound';
+
   public constructor(context: ErrorContext) {
     super(`UserResourceTag not found.`, context);
   }

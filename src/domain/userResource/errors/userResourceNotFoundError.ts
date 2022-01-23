@@ -10,6 +10,8 @@ type ErrorContext =
     };
 
 export class UserResourceNotFoundError extends DomainError<ErrorContext> {
+  public readonly name: 'UserResourceNotFound';
+
   public constructor(context: ErrorContext) {
     super(`UserResource with provided params not found.`, context);
   }
