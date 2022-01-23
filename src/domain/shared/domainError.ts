@@ -1,4 +1,6 @@
-export class DomainError<Context> extends Error {
+export abstract class DomainError<Context> extends Error {
+  public abstract override readonly name: string;
+
   public readonly context: Context;
 
   public constructor(message: string, context: Context) {
