@@ -5,9 +5,7 @@ type ErrorContext = {
 };
 
 export class TagNotFoundError extends DomainError<ErrorContext> {
-  public readonly name: 'TagNotFound';
-
   public constructor(context: ErrorContext) {
-    super(`Tag not found.`, context);
+    super(TagNotFoundError.name, `Tag not found.`, context);
   }
 }

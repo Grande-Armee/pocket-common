@@ -1,11 +1,10 @@
-export abstract class DomainError<Context> extends Error {
-  public abstract override readonly name: string;
-
+export class DomainError<Context> extends Error {
   public readonly context: Context;
 
-  public constructor(message: string, context: Context) {
+  public constructor(name: string, message: string, context: Context) {
     super(message);
 
+    this.name = name;
     this.context = context;
   }
 }

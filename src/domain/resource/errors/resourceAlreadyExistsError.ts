@@ -5,9 +5,7 @@ type ErrorContext = {
 };
 
 export class ResourceAlreadyExistsError extends DomainError<ErrorContext> {
-  public readonly name: 'ResourceAlreadyExists';
-
   public constructor(context: ErrorContext) {
-    super(`Resource already exists.`, context);
+    super(ResourceAlreadyExistsError.name, `Resource already exists.`, context);
   }
 }
