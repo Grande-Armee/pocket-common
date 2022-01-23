@@ -7,6 +7,7 @@ import { IntegrationEvent } from '../../../domain/shared';
 import { UuidService } from '../../../uuid/services/uuid/uuidService';
 import { BrokerExchange } from '../../brokerExchange';
 import { BrokerMessageDataDto, BrokerMessageDto, BrokerResponseDto } from '../../dtos';
+import { BrokerError } from '../../errors';
 import { BrokerMessage } from '../../types';
 
 @Injectable()
@@ -70,11 +71,10 @@ export class BrokerService {
       timeout: 25000,
     });
 
-    console.log({ response });
-
     if (!response.success) {
-      // TODO: better handling
-      throw new Error('RPC failed.');
+      const { message, name, stack, details } = response.payload;
+
+      throw new BrokerError(name, message, stack, details);
     }
 
     return response.payload as any as Response;
